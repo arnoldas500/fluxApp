@@ -15,14 +15,15 @@ def formatTime(params):
     dates = params['dates']
     datesF = datetime.datetime.strftime(dates, '%Y/%m/%dT')
 
-def getCSV(params):
+def getCSV(params, dates):
     #timeMin = params['time_min']                                                                                                                                                    
     #timeMax = params['time_max']                                                                                                                                                    
-    dates = params['dates']
-    #datesStrp = dates.replace("/","")                                                                                                                                               
+    date = params['dates']
+    datesStrp = dates.replace("/","")
     #20170909_FLUX_BURT_Flux_NYSMesonet.csv                                                                                                                                          
-    #df = pd.read_csv('/flux/' + dates + datesStrp + '_FLUX_BURT_Flux_NYSMesonet.csv');                                                                                              
-    #print(df.head())                                                                                                                                                                
+    print('/flux/' + dates +'/' +datesStrp + '_FLUX_BURT_Flux_NYSMesonet.csv')
+    df = pd.read_csv('/flux/' + dates + '/' + datesStrp + '_FLUX_BURT_Flux_NYSMesonet.csv')
+    print(df.head())
     a = "arnold"
     return a
 
@@ -36,7 +37,7 @@ def plot():
 
 
     params['dates'] = datetime.datetime.strptime(dates, '%Y/%m/%d')
-    response = getCSV(params)
+    response = getCSV(params, dates)
 
     #time_min_str = request.args.get('time_min', type=str)                                                                                                                           
     #params['time_min'] = datetime.datetime.strptime(time_min_str, '%Y-%m-%dT%H:%M:00.000Z')                                                                                         
