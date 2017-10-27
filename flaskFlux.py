@@ -1,3 +1,4 @@
+# run from terminal with:                                                                            
 # export FLASK_APP=flaskFlux.py                                                                          
 # python3 -m flask run --host=0.0.0.0 -p 9093 --with-threads
 import io
@@ -49,24 +50,21 @@ def getCSV(params, dates):
     return dfJson
 
 def testCSV(params, dates):
-    #timeMin = params['time_min']                                                                                              
-                                                      
-    #timeMax = params['time_max']                                                                                              
-                                                      
+    #timeMin = params['time_min'] 
     date = params['dates']
     datesStrp = dates.replace("/","")
-    #20170909_FLUX_BURT_Flux_NYSMesonet.csv                                                                                    
-                                                      
+    #20170909_FLUX_BURT_Flux_NYSMesonet.csv                                                                                                              
+                            
     print('/flux/' + dates +'/' +datesStrp + '_FLUX_BURT_Flux_NYSMesonet.csv')
     df = pd.read_csv('/flux/' + dates + '/' + datesStrp + '_FLUX_BURT_Flux_NYSMesonet.csv')
 
-#    print(df.head())                                                                                                          
-                                                      
-#    print(df['CO2'])                                                                                                          
-                                                      
+#    print(df.head())                                                                                                                                    
+                            
+#    print(df['CO2'])                                                                                                                                    
+                            
     a = "arnold"
-    df2 = pd.DataFrame() #creating an empty dataframe                                                                          
-                                                      
+    df2 = pd.DataFrame() #creating an empty dataframe                                                                                                    
+                            
     df2['datetime'] = pd.to_datetime(df['datetime'])
     df2['justDate']= df2['datetime'].dt.date
     df2['justHour'] = df2['datetime'].dt.hour
@@ -79,8 +77,8 @@ def testCSV(params, dates):
     print(df2['justHour'])
     print(df2['intDay'])
     print(df2.tail())
-    #df.set_index(['datetime'],inplace=True)                                                                                   
-                                                      #[ [0.0.-0.7] ] day hour co2
+    #df.set_index(['datetime'],inplace=True)                                                                                                             
+                            #[ [0.0.-0.7] ] day hour co2
     #dfJson = df.loc[:,'justDate','justHour','CO2'].to_json()
 
     df2.drop('datetime', axis=1, inplace=True)
@@ -101,8 +99,6 @@ def plot():
     dates = request.args.get('dates',type=str)
     datesF = dates.replace("/", "")
     print(datesF)
-    
-    
     params['dates'] = datetime.datetime.strptime(dates, '%Y/%m/%d')
     response = testCSV(params, dates)
 
