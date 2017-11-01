@@ -1,143 +1,144 @@
 <html>
     <head>
-        <title>Profile Data Browser - xCITE Data Lab</title>
-        <!-- jquery stuff -->
-        <!--    <script src = "/jquery/jquery.min.js"></script> -->
-        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
-         <!--    <script src = "/highcharts/highcharts.js"></script> -->
-        <script src = "https://code.highcharts.com/highcharts.js"></script>
+	<title>Profile Data Browser - xCITE Data Lab</title>
+	<!-- jquery stuff -->
+	<!--    <script src = "/jquery/jquery.min.js"></script> -->
+	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+	 <!--    <script src = "/highcharts/highcharts.js"></script> -->
+	<script src = "https://code.highcharts.com/highcharts.js"></script>
 
-        <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="https://code.highcharts.com/modules/heatmap.js"></script>
-        <script src="https://code.highcharts.com/modules/exporting.js"></script>
-        <script src="https://code.highcharts.com/modules/data.js"></script>
-        <script src="https://code.highcharts.com/modules/boost-canvas.js"></script>
-        <script src="https://code.highcharts.com/modules/boost.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/heatmap.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/data.js"></script>
+	<script src="https://code.highcharts.com/modules/boost-canvas.js"></script>
+	<script src="https://code.highcharts.com/modules/boost.js"></script>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- leaflet stuff -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw==" crossorigin="">
+	<script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA==" crossorigin=""></script>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- leaflet stuff -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0G\
-FeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw==" crossorigin="">
-        <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7Y\
-zW1zJ7XyJV/TT1MrdXvMcA==" crossorigin=""></script>
+	<!-- jquery ui stuff (for calendar dropdown) -->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<!-- timepicker stuff 
+	     <script src="js/jquery.timepicker.min.js"></script>
+	     <link rel="stylesheet" type="text/css" href="css/jquery.timepicker.min.css">
+	   -->
+	<!-- spinning stuff -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+	<!-- a bit of styling -->
+	<style>
+	 h2 {
+	     display: inline-block;
+	     width: 50%;
+	     margin-top: 10px;
+	 }
 
-        <!-- jquery ui stuff (for calendar dropdown) -->
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <!-- timepicker stuff                                                                                                                            
-             <script src="js/jquery.timepicker.min.js"></script>                                                                                         
-             <link rel="stylesheet" type="text/css" href="css/jquery.timepicker.min.css">                                                                
-           -->
-        <!-- spinning stuff -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
-        <!-- a bit of styling -->
-        <style>
-         h2 {
-             display: inline-block;
-             width: 50%;
-             margin-top: 10px;
-         }
-
-        </style>
+	</style>
     </head>
     <body>
-        <h2>Flux data</h2><h3>xCITE Lab</h3>
-        <fieldset>
-            <legend>Data Options:</legend>
-          <label for="datepicker">Time range (UTC):</label><br>
-                <!-- <input type="text" id="datepicker"> -->
-                <input type="text" id="datepicker" class="date start" name="dates">
-        <!--    <input type="text" class="date start"> -->
-                to
-                <input type="text" id="datepicker2" class="date end">
-        <!--    <input type="text" class="date end">    -->
-                <input type="submit" value="Submit">
-            </form>
-        </fieldset>
+	<h2>Flux data</h2><h3>xCITE Lab</h3>
+	<fieldset>
+	    <legend>Data Options:</legend>
+	    <form id="date" action="javascript:sendDate()">
+		<label for="datepicker">Time range (UTC):</label><br>
+		<!-- <input type="text" id="datepicker"> -->
+		<input type="text" id="datepicker" class="date start" name="dates">
+	<!--	<input type="text" class="date start"> -->
+		to
+		<input type="text" id="datepicker2" class="date end">
+	<!--	<input type="text" class="date end">    -->
+		<input type="submit" value="Submit">
+	    </form>
+	</fieldset>
+	
+	<!--
+	     <div id="container" style="height: 300px; min-width: 310px; max-width: 1000px; margin: 0 auto"></div>
 
-        <!--                                                                                                                                             
-             <div id="container" style="height: 300px; min-width: 310px; max-width: 1000px; margin: 0 auto"></div>                                       
-                                                                                                                                                         
-             <!-- Source: http://vikjavev.no/ver/highcharts-demos/heatmap.csv.php?year=2013                                                              
-             <pre id="csv" style="display: none">Date,Time,Temperature                                                                                   
-                                                                                                                                                         
-             <style type="text/css">                                                                                                                     
-             body { font-family:arial, helvetica, sans-serif; font-weight:normal; font-size:13px; color:#000; text-align:left; margin:3px 0px; }         
-             #wrap { width:500px; height:500px; margin:20px;  }                                                                                          
-             </style>                                                                                                                                    
-                                                                                                                                                         
-             <script type="text/javascript">                                                                                                             
-             $.get('/home/xcite/flux/myData.csv', function(data) {                                                                                       
-             var build = '<table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">\n';                          
-             var rows = data.split("\n");                                                                                                                
-             rows.forEach( function getvalues(thisRow) {                                                                                                 
-             build += "<tr>\n";                                                                                                                          
-             var columns = thisRow.split(",");                                                                                                           
-             for(var i=0;i<columns.length;i++){ build += "<td>" + columns[i] + "</td>\n"; }                                                              
-             build += "</tr>\n";                                                                                                                         
-             })                                                                                                                                          
-             build += "</table>";                                                                                                                        
-             $('#wrap').append(build);                                                                                                                   
-             });</script>                                                                                                                                
-                                                                                                                                                         
-                                                                                                                                                         
-             </pre>                                                                                                                                      
-                                                                                                                                                         
-           -->
+	     <!-- Source: http://vikjavev.no/ver/highcharts-demos/heatmap.csv.php?year=2013 
+	     <pre id="csv" style="display: none">Date,Time,Temperature
 
-        <script type="text/javascript">
+	     <style type="text/css">
+	     body { font-family:arial, helvetica, sans-serif; font-weight:normal; font-size:13px; color:#000; text-align:left; margin:3px 0px; }
+	     #wrap { width:500px; height:500px; margin:20px;  }
+	     </style>
 
-         var base_url = 'http://appsvr.asrc.cestm.albany.edu:9093/';
-         var datepicker = $('#datepicker');
-         var datepicker2 = $('#datepicker2');
+	     <script type="text/javascript">
+	     $.get('/home/xcite/flux/myData.csv', function(data) {
+	     var build = '<table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">\n';
+	     var rows = data.split("\n");
+	     rows.forEach( function getvalues(thisRow) {
+	     build += "<tr>\n";
+	     var columns = thisRow.split(",");
+	     for(var i=0;i<columns.length;i++){ build += "<td>" + columns[i] + "</td>\n"; }   			
+	     build += "</tr>\n";
+	     })
+	     build += "</table>";
+	     $('#wrap').append(build);	
+	     });</script>
 
-         var curDate = datepicker[0].value
+	     
+	     </pre>
 
-         date_options = {dateFormat: 'yy/mm/dd'};
-         /* var splitDate = curDate.split("/");
-         
-         var minMMStr = splitDate[1];
-            var minDDStr = splitDate[2];
+	   -->
+	
+	<script type="text/javascript">
+Highcharts.setOptions({ global: { useUTC: false } });
+	 
+	 var base_url = 'http://appsvr.asrc.cestm.albany.edu:9093/';
+	 var datepicker = $('#datepicker');
+	 var datepicker2 = $('#datepicker2');
 
-            var minYY = parseInt(minYYStr)
-            var minMM = parseInt(minMMStr)
-            var minDD = parseInt(minDDStr)*/
+	 var curDate = datepicker[0].value
+	 
+	 date_options = {dateFormat: 'yy/mm/dd'};
+	 /* var splitDate = curDate.split("/");
+	    var minYYStr = splitDate[0];
+	    var minMMStr = splitDate[1];
+	    var minDDStr = splitDate[2];
 
-         datepicker.datepicker(date_options);
-         datepicker2.datepicker(date_options);
+	    var minYY = parseInt(minYYStr)
+	    var minMM = parseInt(minMMStr)
+	    var minDD = parseInt(minDDStr)*/
+	 
+	 datepicker.datepicker(date_options);
+	 datepicker2.datepicker(date_options);
 
-         var dateURL = base_url + 'plot?dates=' + curDate;
+	 var dateURL = base_url + 'plot?dates=' + curDate;
 
-         function dateFun(){
-             var x = document.getElementById("date").action;
+	 function dateFun(){
+	     var x = document.getElementById("date").action;
+	     document.getElementById("date").innerHTML = x;
+
+	     var x = document.getElementById("date").action;
              document.getElementById("date").innerHTML = x;
+	     //formObject.action = dateURL;
+	 }
 
-             var x = document.getElementById("date").action;
-             document.getElementById("date").innerHTML = x;
-             //formObject.action = dateURL;
-         }
+	 function getDate(){
+	    // minDate = datepicker[0].value;
+	 }
 
-         function getDate(){
-            // minDate = datepicker[0].value;
-         }
+	 function sendDate(){
+	     minDate = datepicker[0].value;
+	 curDateF = datepicker[0].value;
+	 lastDate = datepicker2[0].value;
+	     maxDate = datepicker2[0].value;
+	     dateURL = base_url + 'plot?dates=' + curDateF + '&dates=' + lastDate;
 
-         function sendDate(){
-             minDate = datepicker[0].value;
-             curDateF = datepicker[0].value;
-             maxDate = datepicker2[0].value;
-             dateURL = base_url + 'plot?dates=' + curDateF;
-
-             //curDate = datepicker[0].value
+	     //curDate = datepicker[0].value
 //         date_options = {dateFormat: 'yy/mm/dd'};
          splitDate = curDateF.split("/");
-         splitDateMax = maxDate.split("/");
-
-         minYYStr = splitDate[0];
+	 splitDateMax = maxDate.split("/");
+	 
+	 minYYStr = splitDate[0];
          minMMStr = splitDate[1];
          minDDStr = splitDate[2];
 
@@ -145,159 +146,167 @@ zW1zJ7XyJV/TT1MrdXvMcA==" crossorigin=""></script>
          minMM = parseInt(minMMStr)
          minDD = parseInt(minDDStr)
 
-         maxYYStr = splitDateMax[0];
+	 maxYYStr = splitDateMax[0];
          maxMMStr = splitDateMax[1];
          maxDDStr = splitDateMax[2];
 
          maxYY = parseInt(maxYYStr)
          maxMM = parseInt(maxMMStr)
          maxDD = parseInt(maxDDStr)
-           
-                      //heatMap();
 
-             $.ajax({
-                 method: "GET",
-                 url: dateURL,
-             }).done(function( response ) {
-                 $('#csv').text(response);
-                 //response has json code
-                 heatMap(response);
-             });
+	     
+	     //heatMap();
+	     
+	     $.ajax({
+		 method: "GET",
+		 url: dateURL,
+	     }).done(function( response ) {
+		 $('#csv').text(response);
+		 //response has json code
+		 heatMap(response);
+	     });
 
+	     
+	 }
+	 
 
-         }
+	 function heatMap(response){
+	     
+	     //heatmap stuff below
+	     Highcharts.chart('container', {
 
+		 data: {
+		     csv: document.getElementById('csv').innerHTML
+		     //csv: '/home/xcite/flux/myData.csv'
+		 },
 
-         function heatMap(response){
+		 chart: {
+		     type: 'heatmap',
+		     //margin: [60, 10, 80, 50] //[60, 10, 80, 50]
+	 },
+	 //rowsize: .5,
 
-             //heatmap stuff below
-             Highcharts.chart('container', {
+		 boost: {
+		     useGPUTranslations: true
+		 },
 
-                 data: {
-                     csv: document.getElementById('csv').innerHTML
-                     //csv: '/home/xcite/flux/myData.csv'
-                 },
+		 title: {
+		     text: 'Highcharts heat map for flux',
+		     align: 'left',
+		     x: 40
+		 },
 
-                 chart: {
-                     type: 'heatmap',
-                     margin: [60, 10, 80, 50]
-                 },
-
-                 boost: {
-                     useGPUTranslations: true
-                 },
-
-                 title: {
-                     text: 'Highcharts heat map for flux',
-                     align: 'left',
-                     x: 40
-                 },
-
-                 subtitle: {
-                     text: 'Temperature variation by day and half hour through ...',
-                     align: 'left',
-                     x: 40
-                 },
-
-
-        //       var minDate = getDate();
-                 xAxis: {
-                     type: 'datetime',
-//   min: Date.UTC(2017, 09, 01),
-                     min: Date.UTC(minYY, minMM-1, minDD-1),
-                     max: Date.UTC(maxYY, maxMM-1, maxDD-1),
-
-                     labels: {
-                         align: 'left',
-                         x: 5,
-                         y: 14,
-                         format: '{value:%B}' // long month
-                     },
-                     showLastLabel: false,
-                     tickLength: 16
-                 },
-
-                 yAxis: {
-                     title: {
-                         text: null
-                     },
-                     labels: {
-                         format: '{value}:00'
-                     },
-                     minPadding: 0,
-                     maxPadding: 0,
-                     startOnTick: false,
-                     endOnTick: false,
-                     tickPositions: [0, 6, 12, 18, 24],
-                     tickWidth: 1,
-                     min: 0,
-                     max: 23,
-                     reversed: true
-                 },
-
-                 colorAxis: {
-                     stops: [
-                         [0, '#3060cf'],
-                         [0.5, '#fffbbc'],
-                         [0.9, '#c4463a'],
-                         [1, '#c4463a']
-                     ],
-                     min: 400,
-                     max: 450,
-                     startOnTick: true,
-                     endOnTick: true, //cahnged from false false
-                     labels: {
-                         format: '{value}℃'
-                     }
-                 },
-
-                 series: [{
-                     boostThreshold: 100,
-                     borderWidth: 0,
-                   //data:
-                                //[ [0.0.-0.7] ] day hour co2
-         colsize: 24 * 36e5, // one day
-         //find out what point is below ex point.x
-                     tooltip: {
-                         headerFormat: 'Temperature<br/>',
-                         //day month, year then time in 24 hours then temp in deg C
-                         pointFormat: '{point.x:%e %b, %Y} {point.y}:00: <b>{point.value} ℃</b>'
-                     },
-                     turboThreshold: Number.MAX_VALUE // #3404, remove after 4.0.5 release
-                 }]
-
-                 // var json = {};
-                 // json.chart = chart;
-                 //  json.title = title;
-                 //   json.xAxis = xAxis;
-                 //   json.yAxis = yAxis;
-                 //   json.colorAxis = colorAxis;
-                 //   json.legend = legend;
-                 //   json.tooltip = tooltip;
-                 //   json.series = series;
-
-                 //  $('#container').highcharts(json);
-
-             });
-
-         }
+		 subtitle: {
+		     text: 'CO2  variation by day and half hour for the selected date range above',
+		     align: 'left',
+		     x: 40
+		 },
 
 
-        </script>
+	//	 var minDate = getDate();
+		 xAxis: {
+		     type: 'datetime',
+		     
+		  //   min: Date.UTC(2017, 09, 01),
+		     min: (new Date(minYY, minMM-1, minDD)).getTime(),
+		     max: (new Date(maxYY, maxMM-1, maxDD)).getTime(),
+		     
+		     labels: {
+			 align: 'center',
+			 x: 00,
+			 y: 25,
+			 format: '{value:%B}' // long month
+		     },
+		     showLastLabel: true, //changed from false
+		     tickLength: 16
+		 },
 
-        <div id="container" style="height: 300px; min-width: 310px; max-width: 1000px; margi\                                                            
-                 n: 0 auto"></div>
+		 yAxis: {
+		     title: {
+			 text: null
+		     },
+		     labels: {
+			 format: '{value}:00'
+		     },
+		     minPadding: 0,
+		     maxPadding: 0,
+		     startOnTick: false,
+		     endOnTick: false,
+		     tickPositions: [0, 6, 12, 18, 24], //[0, 6, 12, 18, 24]
+	 tickWidth: 0.5,
+	 
+		     min: 0,
+		     max: 24, //from 23
+		     reversed: true
+		 },
 
-        <!-- Source: http://vikjavev.no/ver/highcharts-demos/heatmap.csv.php?year=2013 -->
-        <pre id="csv" style="display: none">
-          Date,Time,Temperature
+		 colorAxis: {
+		     stops: [
+[0, '#3060cf'],
+//[0.25, '#99ffbb'],
+			 [0.5, '#fffbbc'],
+			 [0.8, '#c4463a'],
+			 [1, '#c4463a']
+		     ],
+		     min: 350,
+		     max: 550,
+		     startOnTick: false,
+		     endOnTick: false, //cahnged from false false
+		     labels: {
+			 format: '{value}℃'
+		     }
+		 },
 
+		 series: [{
+		     boostThreshold: 100,
+		     borderWidth: 0,
+		     nullColor: '#EFEFEF',
+		     //data:
+				//[ [0.0.-0.7] ] day hour co2 
+	 colsize: 24 * 36e5, // one day
+	 rowsize: 0.5,
+	 //find out what point is below ex point.x
+		     tooltip: {
+			 headerFormat: 'Flux (CO2)<br/>',
+			 //day month, year then time in 24 hours then temp in deg C
+			 pointFormat: '{point.x:%e %b, %Y} {point.y}:00: <b>{point.value} ℃</b>'
+		     },
+		     turboThreshold: Number.MAX_VALUE // #3404, remove after 4.0.5 release
+		 }]
 
-        </pre>
+		 // var json = {};   
+		 // json.chart = chart; 
+		 //  json.title = title;       
+		 //   json.xAxis = xAxis; 
+		 //   json.yAxis = yAxis; 
+		 //   json.colorAxis = colorAxis; 
+		 //   json.legend = legend; 
+		 //   json.tooltip = tooltip; 
+		 //   json.series = series;       
 
+		 //  $('#container').highcharts(json);
 
-        <div id="divId"></div>
+	     });
 
+	 }
 
+//Highcharts.setOptions({ global: { useUTC: false } });
+	 
+	</script>
+
+	<div id="container" style="height: 300px; min-width: 310px; max-width: 1000px; margi\
+		 n: 0 auto"></div>
+
+	<!-- Source: http://vikjavev.no/ver/highcharts-demos/heatmap.csv.php?year=2013 -->
+	<pre id="csv" style="display: none">
+	  Date,Time,Temperature
+      
+      
+	</pre>
+
+	
+	<div id="divId"></div>
+	
+	
     </body>
 </html>
