@@ -164,11 +164,20 @@ Highcharts.setOptions({ global: { useUTC: false } });
 		 $('#csv').text(response);
 		 //response has json code
 		 heatMap(response);
-	     });
+})
+.fail(function(jqXHR){
+if(jqXHR.status==500 || jqXHR.status==0){
+$('#errorDiv').text("NOTE: You selected a date thats out of range! Please try again!").delay(2000).fadeOut();
+// internal server error or internet connection broke
+heatMap(response);
+        }
+
+});
 
 	     
 	 }
 	 
+
 
 	 function heatMap(response){
 	     
@@ -253,7 +262,7 @@ Highcharts.setOptions({ global: { useUTC: false } });
 		     startOnTick: false,
 		     endOnTick: false, //cahnged from false false
 		     labels: {
-			 format: '{value}℃'
+			 format: '{value} φ'
 		     }
 		 },
 
@@ -269,7 +278,7 @@ Highcharts.setOptions({ global: { useUTC: false } });
 		     tooltip: {
 			 headerFormat: 'Flux (CO2)<br/>',
 			 //day month, year then time in 24 hours then temp in deg C
-			 pointFormat: '{point.x:%e %b, %Y} {point.y}:00: <b>{point.value} ℃</b>'
+			 pointFormat: '{point.x:%e %b, %Y} {point.y}:00: <b>{point.value} φ</b>'
 		     },
 		     turboThreshold: Number.MAX_VALUE // #3404, remove after 4.0.5 release
 		 }]
@@ -293,6 +302,8 @@ Highcharts.setOptions({ global: { useUTC: false } });
 //Highcharts.setOptions({ global: { useUTC: false } });
 	 
 	</script>
+
+	<div id="errorDiv"></div>
 
 	<div id="container" style="height: 300px; min-width: 310px; max-width: 1000px; margi\
 		 n: 0 auto"></div>
