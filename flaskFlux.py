@@ -194,6 +194,6 @@ def plot():
     #response = getCSV(params)
     # img = getPlot(request.args)                                                                    
     # response = make_response(img.getvalue())                                                       
-    #for matplotlib
+    #for matplotlib 
     # response.headers['Content-Type'] = 'image/png'
     return response
