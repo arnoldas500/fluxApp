@@ -50,7 +50,7 @@ def getCSV(params, dates):
     dfJson = df2.to_json()
     return dfJson
 
-def testCSV(params, dates, dateStartList, dateEndList):
+def testCSV(params, dates, dateStartList, dateEndList, select):
     #timeMin = params['time_min']                                                                                                                                                    
     #timeMax = params['time_max']                                                                                                                                                    
     #date = params['dates']
@@ -76,7 +76,7 @@ def testCSV(params, dates, dateStartList, dateEndList):
         #curDateInt = int(curDateSTR)
         dateSlash = curDateSTR.replace("-","/")
         dateStrp = curDateSTR.replace("/","")
-        dfList.append(pd.read_csv('/flux/' + dateSlash + '/' + dateStrp + '_FLUX_BURT_Flux_NYSMesonet.csv'))
+        dfList.append(pd.read_csv('/flux/' + dateSlash + '/' + dateStrp + '_FLUX_'+ select +'_Flux_NYSMesonet.csv'))
         #print(dfList)
 
     #Combine a list of pandas dataframes to one pandas dataframe
@@ -130,7 +130,9 @@ def testCSV(params, dates, dateStartList, dateEndList):
 
 @app.route('/plot', methods=['GET'])
 def plot():
-    # organize the request params                                                                    
+    # organize the request params
+    #select = request.form.get('site')
+    select = request.args.get('site',type=str)
     params = {}
     datesOld = request.args.get('dates',type=str)
     
@@ -167,7 +169,7 @@ def plot():
     #response = testCSV(params, dates)
     '''
     #response = testCSV(multiDict, dateStartR, dateEndR)
-    response = testCSV(multiDict, datesOld, dateStartList, dateEndList)
+    response = testCSV(multiDict, datesOld, dateStartList, dateEndList, select)
 
 
 
@@ -194,6 +196,17 @@ def plot():
     #response = getCSV(params)
     # img = getPlot(request.args)                                                                    
     # response = make_response(img.getvalue())                                                       
-    #for matplotlib 
+    #for matplotlib
     # response.headers['Content-Type'] = 'image/png'
+    print(str(select))
     return response
+
+'''
+@app.route("/test" , methods=['GET', 'POST'])
+def test():
+    select = request.form.get('site')
+    return(str(select)) # just to see what select is
+
+if __name__=='__main__':
+    app.run(debug=True)
+'''
